@@ -1,4 +1,8 @@
 \documentclass[sigconf]{acmart}
+\usepackage{hyperref}
+
+\settopmatter{printacmref=false} % Removes citation info below abstract
+\renewcommand\footnotetextcopyrightpermission[1]{} % Removes footnote with conference info
 
 \title{AIH Final Project Report}
 \author{Chelsea Ramos}
@@ -12,13 +16,29 @@
 
 \begin{document}
 
+\begin{titlepage}
+    \centering
+    \vspace*{2cm}
+    {\Huge\bfseries AIH Final Project Report\par}
+    \vspace{1cm}
+    {\Large Chelsea Ramos \par}
+    {\large University of Texas at Austin \par}
+    {\large \href{mailto:chelseanbr@utexas.edu}{chelseanbr@utexas.edu} \par}
+    
+    \vspace{1.5cm}
+    {\large \href{https://example.com/slides.pptx}{PowerPoint Slides} \par}
+    {\large \href{https://example.com/video.mp4}{Video Presentation} \par}
+    {\large \href{https://github.com/yourusername/yourrepo}{Code Repository} \par}
+    {\large \href{https://example.com/data.csv}{Data Source} \par}
+    
+    \vfill
+    {\large \today \par}
+\end{titlepage}
+
 \begin{abstract}
 This is the abstract of your ACM-style research paper.
 As shown in~\cite{sample2024}.
 \end{abstract}
-
-\settopmatter{printacmref=false} % Removes citation info below abstract
-\renewcommand\footnotetextcopyrightpermission[1]{} % Removes footnote with conference info
 
 \maketitle
 
