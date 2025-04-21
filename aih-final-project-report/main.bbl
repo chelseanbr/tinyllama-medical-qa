@@ -2,7 +2,7 @@
 %%% Do NOT edit. File created by BibTeX with style
 %%% ACM-Reference-Format-Journals [18-Jan-2012].
 
-\begin{thebibliography}{2}
+\begin{thebibliography}{3}
 
 %%% ====================================================================
 %%% NOTE TO THE USER: you can override these defaults by providing
@@ -62,6 +62,15 @@
 \tempurl}
 \newblock
 \shownote{arXiv preprint arXiv:2212.13138}.
+
+
+\bibitem[Zhu(2024)]%
+        {zhu2024cura}
+\bibfield{author}{\bibinfo{person}{Jiean Zhu}.} \bibinfo{year}{2024}\natexlab{}.
+\newblock \showarticletitle{Cura-LLaMA: Evaluating Open-Source Large Language Model's Question Answering Capability on Medical Domain}.
+\newblock \bibinfo{journal}{\emph{Applied and Computational Engineering}}  \bibinfo{volume}{90} (\bibinfo{year}{2024}), \bibinfo{pages}{52--60}.
+\newblock
+\href{https://doi.org/10.54254/2755-2721/90/20241725}{doi:\nolinkurl{10.54254/2755-2721/90/20241725}}
 
 
 \end{thebibliography}

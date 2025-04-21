@@ -1,4 +1,4 @@
-# Fine-Tuning a Large Language Model for Layperson Medical QA
+# Fine-Tuning a Large Language Model for Layperson Medical Question Answering
 	AI in Healthcare
 	MSAI Spr '25
 	Chelsea Ramos
