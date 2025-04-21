@@ -1,5 +1,17 @@
 # aih-final-project
 
+## My Plan
+
+Objectives:
+- Generate 5k medical multiple-choice questions (MCQs)
+    - Using Phi-2 in Colab Pro and the MedQuAD dataset
+- Fine-tune TinyLLaMA with generated MCQs
+- Evaluate model accuracy on held-out MCQs
+- Possibly compare against other models (baseline or zero-shot)
+
+Future Work
+- Use larger 7B+ models like Mistral
+
 ## Notes
 
 1. MedQuAD
