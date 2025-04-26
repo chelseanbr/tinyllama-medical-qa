@@ -2,8 +2,8 @@
 \usepackage{hyperref}
 \usepackage{graphicx}
 
-\settopmatter{printacmref=false} % Removes citation info below abstract
-\renewcommand\footnotetextcopyrightpermission[1]{} % Removes footnote with conference info
+\settopmatter{printacmref=false, printccs=false}
+\renewcommand\footnotetextcopyrightpermission[1]{}
 
 \title{Rejection Sampling for Medical MCQ Generation and Fine-Tuning TinyLlaMA for Layperson QA}
 \author{Chelsea Ramos}
@@ -17,9 +17,10 @@
 
 \begin{document}
 
-% ---- Cover Page ----
-\vspace*{2cm}
-\begin{center}
+% ---- Start Cover Page ----
+\begin{titlepage}
+    \centering
+    \vspace*{2cm}
     {\Huge\bfseries Rejection Sampling for Medical MCQ Generation and Fine-Tuning TinyLlaMA for Layperson QA\par}
     \vspace{1cm}
     {\Large Chelsea Ramos \par}
@@ -31,38 +32,50 @@
     {\large Video Presentation: \href{https://example.com/video.mp4}{Video Presentation} \par}
     {\large Code Repository: \href{https://github.com/chelseanbr/aih-project}{github.com/chelseanbr/aih-project} \par}
     {\large Data Source: \href{https://huggingface.co/datasets/lavita/MedQuAD}{huggingface.co/datasets/lavita/MedQuAD} \par}
-\end{center}
-\vfill
-\begin{center}
+    
+    \vfill
     {\large \today \par}
-\end{center}
+\end{titlepage}
+% ---- End Cover Page ----
 
-\newpage
-% ------------------------------------------------------
 \maketitle
+
 \section{Introduction}
+
 Medical question answering is a challenging task due to the complexity of medical language and the need for accurate information.
-In this project, I focus on generating multiple-choice questions (MCQs) from the MedQuAD layperson Question Answering dataset via Rejection Sampling.
-The goal is to create a set of MCQs that can be used to assess layperson medical knowledge.
-Additionally, I fine-tune the TinyLLaMA model to improve its performance on layperson questions.
+In this project, I generate multiple-choice questions (MCQs) from the MedQuAD layperson question answering dataset using rejection sampling.
+The objective is to create a set of MCQs that can effectively assess layperson medical knowledge.
+Additionally, I perform supervised fine-tuning of the TinyLLaMA model using the curated MCQs to improve its performance in answering layperson medical questions.
 
 \section{Related Work}
+
 Discuss previous work here. Citation~\cite{BenAbacha-BMC-2019}.
+Citation~\cite{yuan2023scaling}.
+Citation~\cite{zhu2024cura}.
 
 \section{Methodology}
-Explain what you did.
-\begin{figure}[htbp]
+
+\begin{figure*}[t]
   \centering
-  \includegraphics[width=0.9\textwidth]{../pics/workflow.png}
-  \caption{Workflow for MCQ Generation and Model Fine-Tuning}
+  \includegraphics[width=\textwidth]{../pics/workflow.png}
+  \caption{Workflow for MCQ Generation and Fine-Tuning}
   \label{fig:workflow}
-\end{figure}
+\end{figure*}
 
 \section{Results}
+
 Show results here.
 
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=0.95\linewidth]{../pics/training.png}
+  \caption{Training Loss during Fine-Tuning}
+  \label{fig:training}
+\end{figure}
+
 \section{Conclusion}
-Summarize and future directions.
+Wrap up here.
+
 
 \bibliographystyle{ACM-Reference-Format}
 \bibliography{references}

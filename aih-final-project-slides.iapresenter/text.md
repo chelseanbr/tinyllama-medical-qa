@@ -4,13 +4,20 @@
 	Chelsea Ramos
 ---
 # Introduction
-
+---
+#### Background
+---
+#### Objectives
 ---
 # Method
-
+---
+#### Workflow
+/assets/workflow.png
+size: contain
 ---
 # Results
 
 ---
 # Future Directions
-
+---
+# Thank You!
