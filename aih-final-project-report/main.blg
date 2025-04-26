@@ -1,0 +1,59 @@
+This is BibTeX, Version 0.99d (TeX Live 2025)
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: main.aux
+The style file: ACM-Reference-Format.bst
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
+Database file #1: references.bib
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated glb_str_ptr (elt_size=4) to 20 items from 10.
+Reallocated global_strs (elt_size=200001) to 20 items from 10.
+Reallocated glb_str_end (elt_size=4) to 20 items from 10.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated wiz_functions (elt_size=4) to 9000 items from 6000.
+Warning--page numbers missing in both pages and numpages fields in BenAbacha-BMC-2019
+Warning--no number and no volume in yuan2023scaling
+Warning--page numbers missing in both pages and numpages fields in yuan2023scaling
+You've used 3 entries,
+            6056 wiz_defined-function locations,
+            1506 strings with 18671 characters,
+and the built_in function-call counts, 3539 in all, are:
+= -- 539
+> -- 119
+< -- 0
++ -- 42
+- -- 45
+* -- 249
+:= -- 336
+add.period$ -- 16
+call.type$ -- 3
+change.case$ -- 23
+chr.to.int$ -- 3
+cite$ -- 6
+duplicate$ -- 265
+empty$ -- 193
+format.name$ -- 53
+if$ -- 896
+int.to.chr$ -- 2
+int.to.str$ -- 1
+missing$ -- 12
+newline$ -- 74
+num.names$ -- 21
+pop$ -- 109
+preamble$ -- 1
+purify$ -- 47
+quote$ -- 0
+skip$ -- 81
+stack$ -- 0
+substring$ -- 210
+swap$ -- 18
+text.length$ -- 0
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 48
+warning$ -- 3
+while$ -- 20
+width$ -- 0
+write$ -- 104
+(There were 3 warnings)

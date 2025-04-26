@@ -40,7 +40,7 @@
         {BenAbacha-BMC-2019}
 \bibfield{author}{\bibinfo{person}{Asma Ben~Abacha} {and} \bibinfo{person}{Dina Demner-Fushman}.} \bibinfo{year}{2019}\natexlab{}.
 \newblock \showarticletitle{A Question-Entailment Approach to Question Answering}.
-\newblock \bibinfo{journal}{\emph{BMC Bioinformatics}}  \bibinfo{volume}{20} (\bibinfo{year}{2019}).
+\newblock \bibinfo{journal}{\emph{BMC Bioinformatics}} \bibinfo{volume}{20}, \bibinfo{number}{1} (\bibinfo{year}{2019}).
 \newblock
 \urldef\tempurl%
 \url{https://bmcbioinformatics.biomedcentral.com/articles/10.1186/s12859-019-3119-4}
@@ -50,18 +50,16 @@
 \shownote{Article number 511:1--511:23}.
 
 
-\bibitem[Singhal et~al\mbox{.}(2022)]%
-        {singhal2022large}
-\bibfield{author}{\bibinfo{person}{Karan Singhal}, \bibinfo{person}{Shekoofeh Azizi}, \bibinfo{person}{Tien Tu}, {and} \bibinfo{person}{et al.}} \bibinfo{year}{2022}\natexlab{}.
-\newblock \showarticletitle{Large Language Models Encode Clinical Knowledge}.
-\newblock  (\bibinfo{year}{2022}).
+\bibitem[Yuan et~al\mbox{.}(2023)]%
+        {yuan2023scaling}
+\bibfield{author}{\bibinfo{person}{Zheng Yuan}, \bibinfo{person}{Hongyi Yuan}, \bibinfo{person}{Chengpeng Li}, \bibinfo{person}{Guanting Dong}, \bibinfo{person}{Keming Lu}, \bibinfo{person}{Chuanqi Tan}, \bibinfo{person}{Chang Zhou}, {and} \bibinfo{person}{Jingren Zhou}.} \bibinfo{year}{2023}\natexlab{}.
+\newblock \showarticletitle{Scaling Relationship on Learning Mathematical Reasoning with Large Language Models}.
+\newblock \bibinfo{journal}{\emph{arXiv preprint arXiv:2308.01825}} (\bibinfo{year}{2023}).
 \newblock
 \urldef\tempurl%
-\url{https://arxiv.org/abs/2212.13138}
+\url{https://arxiv.org/abs/2308.01825}
 \showURL{%
 \tempurl}
-\newblock
-\shownote{arXiv preprint arXiv:2212.13138}.
 
 
 \bibitem[Zhu(2024)]%
