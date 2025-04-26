@@ -177,3 +177,5 @@ cython_debug/
 logs/
 archive/models/
 archive/refs/
+tinyllama-mcq-lora/
+tinyllama-mcq-lora.zip
