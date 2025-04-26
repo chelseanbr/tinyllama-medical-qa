@@ -1,4 +1,4 @@
-# Fine-Tuning Language Models for Layperson Medical QA with Rejection Sampling
+# Rejection Sampling for Medical MCQ Generation and Fine-Tuning TinyLlaMA for Layperson QA
 	AI in Healthcare
 	MSAI Spr '25
 	Chelsea Ramos
@@ -13,3 +13,4 @@
 
 ---
 # Future Directions
+

@@ -1,10 +1,11 @@
 \documentclass[sigconf]{acmart}
 \usepackage{hyperref}
+\usepackage{graphicx}
 
 \settopmatter{printacmref=false} % Removes citation info below abstract
 \renewcommand\footnotetextcopyrightpermission[1]{} % Removes footnote with conference info
 
-\title{Fine-Tuning Language Models for Layperson Medical QA with Rejection Sampling}
+\title{Rejection Sampling for Medical MCQ Generation and Fine-Tuning TinyLlaMA for Layperson QA}
 \author{Chelsea Ramos}
 \affiliation{
   \institution{University of Texas at Austin}
@@ -16,10 +17,10 @@
 
 \begin{document}
 
-\begin{titlepage}
-    \centering
-    \vspace*{2cm}
-    {\Huge\bfseries Fine-Tuning Language Models for Layperson Medical QA with Rejection Sampling\par}
+% ---- Cover Page ----
+\vspace*{2cm}
+\begin{center}
+    {\Huge\bfseries Rejection Sampling for Medical MCQ Generation and Fine-Tuning TinyLlaMA for Layperson QA\par}
     \vspace{1cm}
     {\Large Chelsea Ramos \par}
     {\large University of Texas at Austin \par}
@@ -30,34 +31,38 @@
     {\large Video Presentation: \href{https://example.com/video.mp4}{Video Presentation} \par}
     {\large Code Repository: \href{https://github.com/chelseanbr/aih-project}{github.com/chelseanbr/aih-project} \par}
     {\large Data Source: \href{https://huggingface.co/datasets/lavita/MedQuAD}{huggingface.co/datasets/lavita/MedQuAD} \par}
-    
-    \vfill
+\end{center}
+\vfill
+\begin{center}
     {\large \today \par}
-\end{titlepage}
+\end{center}
 
-\begin{abstract}
-% LLMs show strong clinical reasoning~\cite{singhal2022large}.
-Question entailment is also important~\cite{BenAbacha-BMC-2019}.
-Another citation~\cite{zhu2024cura}.
-Last citation~\cite{yuan2023scaling}.
-\end{abstract}
-
+\newpage
+% ------------------------------------------------------
 \maketitle
-
 \section{Introduction}
-This is where you introduce your work.
+Medical question answering is a challenging task due to the complexity of medical language and the need for accurate information.
+In this project, I focus on generating multiple-choice questions (MCQs) from the MedQuAD layperson Question Answering dataset via Rejection Sampling.
+The goal is to create a set of MCQs that can be used to assess layperson medical knowledge.
+Additionally, I fine-tune the TinyLLaMA model to improve its performance on layperson questions.
 
 \section{Related Work}
-Discuss previous work here.
+Discuss previous work here. Citation~\cite{BenAbacha-BMC-2019}.
 
 \section{Methodology}
 Explain what you did.
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.9\textwidth]{../pics/workflow.png}
+  \caption{Workflow for MCQ Generation and Model Fine-Tuning}
+  \label{fig:workflow}
+\end{figure}
 
 \section{Results}
-Show your results here.
+Show results here.
 
 \section{Conclusion}
-Wrap it up and suggest future directions.
+Summarize and future directions.
 
 \bibliographystyle{ACM-Reference-Format}
 \bibliography{references}
