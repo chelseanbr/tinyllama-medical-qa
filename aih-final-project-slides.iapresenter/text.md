@@ -23,6 +23,21 @@
 /assets/workflow.png
 size: contain
 ---
+#### MCQ Generation Prompt
+/assets/mcqgen-prompt.png
+size: contain
+---
+#### Generated MCQs
+/assets/data-sampled.png
+size: contain
+/assets/data-generated.png
+size: contain
+---
+#### Final Data
+/assets/data-train.png
+size: contain
+y: bottom
+---
 # Results
 ---
 #### Model Evaluation
