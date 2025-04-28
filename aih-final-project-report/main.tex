@@ -6,6 +6,7 @@
 \renewcommand\footnotetextcopyrightpermission[1]{}
 \pagestyle{empty}
 \setcopyright{none}
+\acmConference{}{}{}
 
 \title{Rejection Sampling for Medical MCQ Generation and Fine-Tuning TinyLlaMA for Layperson QA}
 \author{Chelsea Ramos}
@@ -40,137 +41,133 @@
 \end{titlepage}
 % ---- End Cover Page ----
 
+\begin{abstract}
+Access to accurate, understandable medical information is essential, especially for laypersons without clinical expertise. This project explores how to improve layperson medical question answering (QA) by generating multiple-choice questions (MCQs) from the MedQuAD dataset and fine-tuning TinyLLaMA using a lightweight, parameter-efficient method (LoRA). Through rejection sampling and few-shot Chain-of-Thought prompting, a high-quality MCQ dataset was curated. Fine-tuning led to significant gains over baseline TinyLLaMA and MedAlpaca models, demonstrating the potential of focused domain adaptation even on smaller models.
+\end{abstract}
+
 \maketitle
 
 \section{Introduction}
-
-Medical question answering is a challenging task due to the complexity of medical language and the need for accurate information.
-In this project, I generate multiple-choice questions (MCQs) from the MedQuAD layperson question answering dataset using rejection sampling.
-The objective is to create a set of MCQs that can effectively assess layperson medical knowledge.
-Additionally, I perform supervised fine-tuning of the TinyLLaMA model using the curated MCQs to improve its performance in answering layperson medical questions.
+Medical QA remains a tough challenge for large language models (LLMs). Medical language is complex, and layperson users require responses that are both medically accurate and easy to understand. Many general-purpose LLMs are not reliably tuned for this domain, leaving significant gaps in accessibility to trusted medical information. To address this, I developed a pipeline to generate high-quality MCQs from the MedQuAD dataset and fine-tuned TinyLLaMA to better handle layperson medical QA. Improving accessibility to medical QA supports broader public health goals by making accurate, understandable answers more available to everyone.
 
 \section{Related Work}
-
-Medical question answering has been explored as a structured retrieval and reasoning task in prior work. Ben Abacha and Demner-Fushman~\cite{BenAbacha-BMC-2019} introduced an entailment-based framework for medical question answering, highlighting the importance of question relevance and answer justification when designing systems for layperson use.
-Recent advances in scaling language models have also improved the ability to reason over complex domains like mathematics and medicine. Yuan et al.~\cite{yuan2023scaling} studied how scaling model size impacts performance on mathematical reasoning tasks, showing that larger models exhibit stronger generalization with limited additional supervision.
-In the context of data generation for medical QA, Zhu et al.~\cite{zhu2024cura} proposed CURA, a method for generating synthetic QA datasets using large language models. Their work shows that careful control of synthetic data generation can improve downstream QA performance, particularly in specialized domains like healthcare.
-Building on these directions, this project focuses on generating high-quality MCQs from existing layperson medical QA datasets and fine-tuning smaller language models for efficient and accurate question answering.
+Ben Abacha and Demner-Fushman~\cite{BenAbacha-BMC-2019} proposed an entailment-based medical QA framework, emphasizing the need for relevance and clear justification in answers. Yuan et al.~\cite{yuan2023scaling} studied how scaling LLM size improves reasoning abilities but pointed out challenges in efficiently adapting large models to specific domains. Zhu et al.~\cite{zhu2024cura} demonstrated how synthetic QA data generation, when carefully controlled, can boost medical QA model performance. This project builds on these ideas by combining curated QA generation with efficient fine-tuning for a small, adaptable model.
 
 \section{Methodology}
+The project follows a two-stage pipeline: MCQ generation and TinyLLaMA fine-tuning. The overall process is shown in Figure~\ref{fig:workflow}.
 
-The methodology consists of two main components: MCQ generation and model fine-tuning.
-For MCQ generation, I use a rejection sampling technique to create multiple-choice questions from the MedQuAD layperson medical dataset. This approach ensures that the generated questions are relevant, high-quality, and suitable for assessing layperson medical knowledge.
-For fine-tuning, I train the TinyLLaMA model on the curated MCQ dataset using supervised learning. The model learns to predict the correct answer given a medical question and multiple options.
-I evaluate the fine-tuned model on a separate hold-out test set to assess its performance on layperson medical question answering.
-An overview of the MCQ generation and fine-tuning workflow is illustrated in Figure~\ref{fig:workflow}.
-
-\begin{figure*}[htbp]
+\begin{figure}[htbp]
   \centering
-  \includegraphics[width=\linewidth]{../pics/workflow.png}
+  \includegraphics[width=\linewidth]{workflow.png}
   \caption{Workflow for MCQ Generation and Fine-Tuning}
   \label{fig:workflow}
-\end{figure*}
-
-\begin{figure}[htbp]
-  \centering
-  \includegraphics[width=\linewidth]{../pics/mcqgen-prompt.png}
-  \caption{MCQ Generation Prompt}
-  \label{fig:mcqgen}
 \end{figure}
 
+\subsection{MCQ Generation}
+I began by sampling 3,000 QA pairs from the MedQuAD dataset. A custom few-shot prompt (Figure~\ref{fig:mcqprompt}) with Chain-of-Thought (CoT) examples was designed to guide MCQ generation. Few-shot prompting helped the model produce well-structured questions with reasoning steps.
+
 \begin{figure}[htbp]
   \centering
-  \includegraphics[width=\linewidth]{../pics/data-sampled.png}
-  \caption{Sampled Data}
+  \includegraphics[width=0.9\linewidth]{mcqgen-prompt.png}
+  \caption{MCQ Generation Prompt}
+  \label{fig:mcqprompt}
+\end{figure}
+
+After generation, rejection sampling was applied to filter outputs for medical correctness, clarity, and formatting. Sampling and generation statistics are shown in Figure~\ref{fig:sampled} and Figure~\ref{fig:generated}.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.9\linewidth]{data-sampled.png}
+  \caption{Sampled Data from MedQuAD}
   \label{fig:sampled}
 \end{figure}
 
 \begin{figure}[htbp]
   \centering
-  \includegraphics[width=\linewidth]{../pics/data-generated.png}
-  \caption{Generated Data}
+  \includegraphics[width=0.9\linewidth]{data-generated.png}
+  \caption{Generated MCQs after Prompting}
   \label{fig:generated}
 \end{figure}
 
+Following manual filtering, 511 MCQs were finalized (Figure~\ref{fig:final}), with an 80\%/20\% train/test split.
+
 \begin{figure}[htbp]
   \centering
-  \includegraphics[width=\linewidth]{../pics/data-train.png}
-  \caption{Final Data}
+  \includegraphics[width=0.9\linewidth]{data-train.png}
+  \caption{Final Train/Test Split}
   \label{fig:final}
 \end{figure}
 
+\subsection{Fine-Tuning TinyLLaMA with LoRA}
+TinyLLaMA was fine-tuned using LoRA (Low-Rank Adaptation), which inserts small trainable matrices into attention layers instead of updating the full model. This enables efficient adaptation with limited resources.
+
+Fine-tuning parameters:
+\begin{itemize}
+    \item LoRA Rank: 8
+    \item LoRA Alpha: 32
+    \item Optimizer: AdamW, learning rate 1e-3
+\end{itemize}
+
+The model was trained using supervised learning to predict the correct MCQ answer label.
+
 \section{Results}
 
-The results evaluate the performance of the fine-tuned TinyLLaMA model against the baseline TinyLLaMA and MedAlpaca models on the layperson medical MCQ dataset.
+\subsection{Answer Distributions}
 
-The overall workflow for MCQ generation and model fine-tuning is illustrated in Figure~\ref{fig:workflow}.
-
-\subsection{Model Answer Distributions}
-The answer distributions for each model are shown in Figures~\ref{fig:baseline}, \ref{fig:finetuned}, and \ref{fig:medalpaca}.
-The baseline TinyLLaMA model (Figure~\ref{fig:baseline}) exhibits a strong bias toward selecting a single answer choice ("B"), reflecting poor generalization to the diverse MCQ set.
-After supervised fine-tuning, the TinyLLaMA model (Figure~\ref{fig:finetuned}) demonstrates improved alignment with the ground truth distribution, though some imbalance across options remains.
-The MedAlpaca 7B model (Figure~\ref{fig:medalpaca}) shows a broader spread across answer choices compared to the baseline, but still underperforms the fine-tuned TinyLLaMA on accuracy.
-
-\subsection{Model Accuracy}
-Figure~\ref{fig:accuracy} summarizes the accuracy of each model on the test set.
-The fine-tuned TinyLLaMA achieves the highest accuracy at 33.98%, outperforming both the baseline TinyLLaMA (14.56%) and the MedAlpaca model (18.45%).
-These results highlight the effectiveness of using rejection-sampled MCQs and lightweight supervised fine-tuning for improving model performance on layperson medical QA tasks.
-
-\subsection{Dataset Characteristics and Training Dynamics}
-The distribution of answers in the training and test sets is shown in Figure~\ref{fig:dist}, confirming that the dataset is balanced across answer choices A, B, C, and D.
-Figure~\ref{fig:training} presents the training and validation loss curves during fine-tuning, showing a steady decrease across epochs and suggesting effective learning without signs of overfitting.
+Figure~\ref{fig:dist} confirms that the train/test splits were balanced. Figure~\ref{fig:baseline} shows that baseline TinyLLaMA was biased toward a single answer choice. Fine-tuning improved answer distribution (Figure~\ref{fig:finetuned}), while MedAlpaca (Figure~\ref{fig:medalpaca}) showed partial improvement.
 
 \begin{figure}[htbp]
   \centering
-  \includegraphics[width=\linewidth]{../pics/baseline-tinyllama-dist.png}
-  \caption{Baseline TinyLlama Results}
-  \label{fig:baseline}
-\end{figure}
-
-\begin{figure}[htbp]
-  \centering
-  \includegraphics[width=\linewidth]{../pics/finetuned-tinyllama-dist.png}
-  \caption{Finetuned TinyLlama Results}
-  \label{fig:finetuned}
-\end{figure}
-
-\begin{figure}[htbp]
-  \centering
-  \includegraphics[width=\linewidth]{../pics/medalpaca-dist.png}
-  \caption{MedAlpaca Results}
-  \label{fig:medalpaca}
-\end{figure}
-
-\begin{figure}[htbp]
-  \centering
-  \includegraphics[width=\linewidth]{../pics/train-test-dist.png}
-  \caption{Train and Test Distribution}
+  \includegraphics[width=0.9\linewidth]{train-test-dist.png}
+  \caption{Train/Test Answer Distribution}
   \label{fig:dist}
 \end{figure}
 
 \begin{figure}[htbp]
   \centering
-  \includegraphics[width=\linewidth]{../pics/training.png}
-  \caption{Loss during Fine-Tuning}
-  \label{fig:training}
+  \includegraphics[width=0.9\linewidth]{baseline-tinyllama-dist.png}
+  \caption{Baseline TinyLLaMA Answer Bias}
+  \label{fig:baseline}
 \end{figure}
 
 \begin{figure}[htbp]
   \centering
-  \includegraphics[width=\linewidth]{../pics/accuracy.png}
-  \caption{Accuracy per Model}
+  \includegraphics[width=0.9\linewidth]{finetuned-tinyllama-dist.png}
+  \caption{Fine-Tuned TinyLLaMA Answer Distribution}
+  \label{fig:finetuned}
+\end{figure}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.9\linewidth]{medalpaca-dist.png}
+  \caption{MedAlpaca Answer Distribution}
+  \label{fig:medalpaca}
+\end{figure}
+
+\subsection{Accuracy}
+As shown in Figure~\ref{fig:accuracy}, fine-tuned TinyLLaMA achieved 33.98\% accuracy, improving substantially over the 14.56\% baseline and 18.45\% MedAlpaca.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.9\linewidth]{accuracy.png}
+  \caption{Accuracy Comparison Across Models}
   \label{fig:accuracy}
 \end{figure}
 
-\clearpage
+\subsection{Training Dynamics}
+Training and validation loss curves (Figure~\ref{fig:training}) show consistent decline without signs of overfitting, supporting the stability of LoRA fine-tuning even on smaller datasets.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.9\linewidth]{training.png}
+  \caption{Training and Validation Loss Curves}
+  \label{fig:training}
+\end{figure}
 
 \section{Conclusion}
-In this project, I developed a pipeline for generating high-quality multiple-choice questions (MCQs) from the MedQuAD layperson medical dataset using rejection sampling, and fine-tuned the TinyLLaMA model for layperson medical question answering.
+This project developed a full pipeline for improving layperson medical QA by combining rejection-sampled MCQ generation with efficient LoRA fine-tuning on TinyLLaMA. Results showed significant accuracy gains despite working with limited data and model size. 
 
-The fine-tuned TinyLLaMA model achieved a substantial improvement in accuracy over the baseline TinyLLaMA and MedAlpaca models, demonstrating the effectiveness of lightweight supervised fine-tuning combined with carefully curated training data.
-
-These results suggest that even small language models can benefit significantly from targeted fine-tuning with high-quality, domain-specific MCQs.
-Future work could explore scaling this approach to larger models, incorporating additional question generation techniques, or evaluating model performance across different types of medical question formats beyond multiple-choice.
+In future work, I plan to scale fine-tuning to larger models like LLaMA-2 and Mistral, explore open-ended medical QA tasks, apply reinforcement learning (RLHF) for better question generation, and benchmark across more diverse medical QA datasets.
 
 \bibliographystyle{ACM-Reference-Format}
 \bibliography{references}
