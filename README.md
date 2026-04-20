@@ -15,16 +15,19 @@ The results demonstrated the potential of focused domain adaptation even on smal
 
 - **Domain Adaptation:** Successfully adapted a lightweight LLM to a highly complex, regulated medical domain to improve layperson QA.
 
-Read the full paper [here](tinyllama-medical-qa.pdf)
+---
+
+- Read the full paper [here](tinyllama-medical-qa-report.pdf)
+- Check out the slide deck [here](tinyllama-medical-qa-slides.pdf)
 
 ![workflow.png](workflow.png)
 
 ## Notebooks
-- [01-sample-data.ipynb](01-sample-data.ipynb)
-- [02-generate-mcqs.ipynb](02-generate-mcqs.ipynb)
-- [03-finetune-model.ipynb](03-finetune-model.ipynb)
-- [04-evaluate-models.ipynb](04-evaluate-models.ipynb)
-- [05-plot-results.ipynb](05-plot-results.ipynb)
+- [01-sample-data.ipynb](notebooks/01-sample-data.ipynb)
+- [02-generate-mcqs.ipynb](notebooks/02-generate-mcqs.ipynb)
+- [03-finetune-model.ipynb](notebooks/03-finetune-model.ipynb)
+- [04-evaluate-models.ipynb](notebooks/04-evaluate-models.ipynb)
+- [05-plot-results.ipynb](notebooks/05-plot-results.ipynb)
 
 ## Data
 [huggingface.co/datasets/lavita/MedQuAD](https://huggingface.co/datasets/lavita/MedQuAD)
