@@ -1,55 +1,30 @@
-# aih-final-project
+# Fine-Tuning TinyLlama for Medical QA
 
-## My Plan
+## Overview
+Access to accurate, understandable medical information is essential, especially for laypersons without clinical expertise. This project explores how to improve layperson medical question answering (QA) by generating multiple-choice questions (MCQs) from the MedQuAD dataset and fine-tuning TinyLlama using a lightweight, parameter-efficient method.
 
-Objectives:
-- Generate 5k medical multiple-choice questions (MCQs)
-    - Using Phi-2 in Colab Pro and the MedQuAD dataset
-- Fine-tune TinyLLaMA with generated MCQs
-- Evaluate model accuracy on held-out MCQs
-- Possibly compare against other models (baseline or zero-shot)
+## Approach
+- **Dataset Curation:** Curated a small MCQ dataset from the MedQuAD dataset through rejection sampling and few-shot Chain-of-Thought (CoT) prompting.
 
-Future Work
-- Use larger 7B+ models like Mistral
+- **Fine-Tuning:** Fine-tuned a TinyLlama baseline model using a lightweight, parameter-efficient method (LoRA).
 
-## Notes
+## Key Results
+The results demonstrated the potential of focused domain adaptation even on smaller foundation models:
 
-1. MedQuAD
-    - Type: Layperson medical questions and answers
-    - Size: ~47,000 QA pairs
-    - Source: NIH, MedlinePlus, National Cancer Institute, etc.
-    - Best For: Patient education, general health QA
-    - Link: https://github.com/abachaa/MedQuAD
+- **Performance Gains:** Fine-tuning led to some gains over both the baseline TinyLlama and specialized MedAlpaca models.
 
+- **Domain Adaptation:** Successfully adapted a lightweight LLM to a highly complex, regulated medical domain to improve layperson QA.
 
-    Format a batch evaluation script using GPT-4 on these QA pairs?
+Read the full paper [here](tinyllama-medical-qa.pdf)
 
-    Build a Streamlit interface to explore the dataset interactively?
+![workflow.png](workflow.png)
 
-    Would you like a quick notebook to load and evaluate a few PubMedQA samples using GPT-4?
+## Notebooks
+- [01-sample-data.ipynb](01-sample-data.ipynb)
+- [02-generate-mcqs.ipynb](02-generate-mcqs.ipynb)
+- [03-finetune-model.ipynb](03-finetune-model.ipynb)
+- [04-evaluate-models.ipynb](04-evaluate-models.ipynb)
+- [05-plot-results.ipynb](05-plot-results.ipynb)
 
-
-### Project Flow
-Convert MedQuAD to Multiple-Choice Format
-→ Use GPT-4 to generate distractors
-→ Store in SFT or MCQ format
-Fine-Tune a Hugging Face LLM
-→ e.g., Mistral-7B, Phi-2, or TinyLLaMA using LoRA
-Evaluate on Held-Out MedQuAD MCQs
-→ Accuracy (% correct)
-→ Optional: Factuality or hallucination review
-
-
-Plan: Two-Stage Fine-Tuning
-
-Stage 1 — MCQ Fine-Tuning (Now)
-Fine-tune TinyLLaMA on MedQuAD-derived MCQs
-Objective: Train the model to select correct answers and learn core medical associations
-Format: Classification or instruction-based MCQs
-Stage 2 — Open-Ended QA Fine-Tuning (Future Work)
-Fine-tune the same model further using open-ended question–answer pairs
-Objective: Enable the model to generate full-text, readable explanations
-Method: Continue training via LoRA or SFT using instruction-style datasets
-
-“This project focuses on fine-tuning a large language model (TinyLLaMA) on MedQuAD-derived multiple-choice questions to teach medical domain understanding.
-As future work, we propose a second-stage fine-tuning using open-ended QA examples from MedQuAD to enable generative medical explanations. This staged approach allows the model to first learn content grounding through structured formats (MCQs) before expanding into more flexible generative reasoning.”
+## Data
+[huggingface.co/datasets/lavita/MedQuAD](https://huggingface.co/datasets/lavita/MedQuAD)
